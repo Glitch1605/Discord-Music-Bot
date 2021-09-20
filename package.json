@@ -1,0 +1,31 @@
+{
+  "name": "discord-music-bot",
+  "version": "1.0.0",
+  "description": "- Node v16.6.1 or above\r - [Lavalink Server](https://github.com/freyacodes/Lavalink)",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Glitch1605",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "erela.js": "^2.3.3",
+    "erela.js-deezer": "^1.0.7",
+    "erela.js-spotify": "^1.2.0",
+    "fs": "^0.0.1-security",
+    "lyrics-finder": "^21.7.0",
+    "node": "^16.6.1",
+    "quickmongo": "^3.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glitch1605/Discord-Music-Bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Glitch1605/Discord-Music-Bot/issues"
+  },
+  "homepage": "https://github.com/Glitch1605/Discord-Music-Bot#readme"
+}
