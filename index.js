@@ -1,30 +1,30 @@
-const verification = require("./verifyConfig")();
+const { verification } = require("./verifyConfig");
 const { Client } = require('discord.js');
 const { Database } = require("quickmongo");
+const { join } = require("path");
+const { readdirSync } = require("fs");
 
-if (verification) {
-    const client = new Client({
-        presence: {
-            status: 'idle',
-            activities: [{
-                "name": "@Vocal",
-                "type": "LISTENING"
-            }]
-        },
-        intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_VOICE_STATES"]
-    });
+if (!verification()) throw new TypeError("Caught Error's While Verification Please Fix Them Then Start The Bot...");
 
-    client.config = require('./config.js');
-    client.db = new Database(client.config.mongodbURL, "prefixes")
+const client = new Client({
+    intents: 1665,
+    presence: {
+        status: 'idle',
+        activities: [{
+            "name": "@Vocal",
+            "type": "LISTENING"
+        }]
+    }
+});
 
-    client.db.on("ready", () => console.log("Connected to Database!"));
+client.config = require('./config.js');
+client.db = new Database(client.config.mongodbURL, "prefixes")
 
-    ["command-handler", "erela-handler", "event-handler"].forEach(handler => {
-        require(`./handlers/${handler}`)(client);
-    });
+client.db.on("ready", () => console.log("Connected to Database!"));
 
-    client.login(client.config.token);
-} else if (!verification) {
-    console.log("Caught Error's While Verification Please Fix Them Then Start The Bot...");
-    process.exit();
-}
+const folder = readdirSync(join(__dirname, "./handlers"))
+for (const file of folder) {
+    require(`./handlers/${file}`)(client)
+};
+
+client.login(client.config.token);
